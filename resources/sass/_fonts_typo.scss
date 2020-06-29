@@ -1,0 +1,55 @@
+@font-face {
+  font-family: MichromaReg;
+  src: url('/fonts/Michroma/Michroma.ttf');
+}
+
+@font-face {
+  font-family: RalewayMed;
+  src: url('/fonts/Raleway/Raleway-Medium.ttf');
+}
+
+@font-face {
+  font-family: RalewayIt;
+  src: url('/fonts/Raleway/Raleway-MediumItalic.ttf');
+}
+
+h1, h2, h3, h4, h5, .navText li {
+  letter-spacing: 2px;
+}
+
+h1 {
+  font-family: MichromaReg;
+  font-size: 3rem;
+  text-shadow: 0px 3px rgba(0, 0, 0, 0.44);
+}
+
+h2, h3 {
+  font-family: RalewayMed;
+  font-size: 1.3rem;
+  text-align: center;
+  @media (min-width: 500px) {
+    font-size: 1.5rem;
+  }
+  @media (min-width: 1024px) {
+    font-size: 2rem;
+  }
+}
+
+h4, h5 {
+  font-family: MichromaReg;
+  font-size: 1rem;
+  @media (min-width: 640px) {
+    font-size: 1.2rem;
+  }
+  @media (min-width: 1024px) {
+    font-size: 1.5rem;
+  }
+}
+
+p, li, label {
+  font-family: RalewayMed;
+  @media (min-width: 1024px) {
+    font-size: 1.2rem;
+  }
+}
+
