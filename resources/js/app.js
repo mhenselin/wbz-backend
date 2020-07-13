@@ -7,69 +7,30 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
+import moment from 'moment';
+import VueMoment from 'vue-moment';
+
+// Install BootstrapVue
+Vue.use(BootstrapVue)
+// Optionally install the BootstrapVue icon components plugin
+Vue.use(IconsPlugin)
+
+// Load Locales ('en' comes loaded by default)
+require('moment/locale/de');
+// Choose Locale
+moment.locale('de');
+Vue.use(VueMoment, { moment });
+
+
+Vue.component('calendar-component', require('./components/CalendarComponent.vue').default);
+
+/**
+ * Next, we will create a fresh Vue application instance and attach it to
+ * the page. Then, you may begin adding components to this application
+ * or customize the JavaScript scaffolding to fit your unique needs.
+ */
 
 const app = new Vue({
     el: '#app',
-});
-
-
-
-import { Calendar } from '@fullcalendar/core';
-import deLocale from '@fullcalendar/core/locales/de';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import timeGridPlugin from '@fullcalendar/timegrid';
-import interactionPlugin from '@fullcalendar/interaction';
-import '@fullcalendar/core/main.css';
-import '@fullcalendar/daygrid/main.css';
-import '@fullcalendar/timegrid/main.css';
-//import '@fullcalendar/list/main.css';
-
-document.addEventListener('DOMContentLoaded', function() {
-    var calendarEl = document.getElementById('calendar');
-
-    var calendar = new Calendar(calendarEl, {
-        plugins: [ timeGridPlugin, dayGridPlugin, interactionPlugin ],
-        locale: deLocale,
-        defaultView: window.screen.width < 768 ? 'timeGridDay' : 'timeGridWeek',
-        height: 700,
-        firstDay: 1,
-        buttonText: {
-            today: 'heute',
-            month: 'Monatsansicht',
-            week: 'Wochenansicht',
-            day: 'Tagesansicht'
-        },
-        header: {
-            left: 'title',
-            center: 'prev next today month agendaWeek agendaDay',
-            right: 'prevYear nextYear'
-        },
-        allDayText: 'ganzer Tag',
-        minTime: '08:00:00',
-        maxTime: '19:00:00',
-        selectable: true,
-        selectMirror: true,
-        defaultAllDayEventDuration: {
-            days: 1
-        },
-        events: '/getEvents',
-        /*dateClick: function(start) {
-            $("#NewEventModalCenter #start").val(start);
-            $('#NewEventModalCenter').modal();
-            $("#NewEventModalCenter #end").val(end.format('DD.MM.YYYY, H:mm'));
-            $('#NewEventModalCenter').modal();
-            $(function () {
-                $('#datetimepickerStart').datetimepicker({
-                    locale: 'de'
-                });
-                $('#datetimepickerEnd').datetimepicker({
-                    locale: 'de'
-                });
-            });
-            $('#NewEventModalCenter #allDay').click(function () {
-                $(this).checked();
-            });
-        },*/
-    });
-    calendar.render();
 });
