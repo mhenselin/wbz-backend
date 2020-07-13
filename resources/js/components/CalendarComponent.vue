@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<FullCalendar v-bind:options="calOptions"></FullCalendar>
-        <new-event-modal :startDate="newStartDate" :startTime="newStartTime" :endDate="newEndDate" :endTime="newEndTime"></new-event-modal>
+        <new-event-modal></new-event-modal>
 	</div>
 </template>
 

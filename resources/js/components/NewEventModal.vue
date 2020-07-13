@@ -22,40 +22,40 @@
                             <label for="start-datepicker">beginnt (Datum):</label>
                             <b-form-datepicker
                                 id="start-datepicker"
-                                v-model="startDate"
+                                v-model="startDateX"
                                 class="mb-2"
                                 locale="de"
-                                name="startDate"
+                                name="startDateX"
                             ></b-form-datepicker>
                         </b-col>
                         <b-col>
                             <label for="start-timepicker">beginnt (Uhrzeit):</label>
                             <b-form-timepicker
                                 id="start-timepicker"
-                                v-model="startTime"
+                                v-model="startTimeX"
                                 locale="de"
-                                name="startTime"
+                                name="startTimeX"
                             ></b-form-timepicker>
                         </b-col>
                     </div>
                     <div class="d-flex flex-column align-items-start">
                         <b-col>
-                            <label for="start-datepicker">endet (Datum):</label>
+                            <label for="end-datepicker">endet (Datum):</label>
                             <b-form-datepicker
-                                id="start-datepicker"
-                                v-model="endDate"
+                                id="end-datepicker"
+                                v-model="endDateX"
                                 class="mb-2"
                                 locale="de"
-                                name="endDate"
+                                name="endDateX"
                             ></b-form-datepicker>
                         </b-col>
                         <b-col>
-                            <label for="start-timepicker">endet (Uhrzeit):</label>
+                            <label for="end-timepicker">endet (Uhrzeit):</label>
                             <b-form-timepicker
-                                id="start-timepicker"
-                                v-model="endTime"
+                                id="end-timepicker"
+                                v-model="endTimeX"
                                 locale="de"
-                                name="endTime"
+                                name="endTimeX"
                             ></b-form-timepicker>
                         </b-col>
                     </div>
@@ -97,19 +97,39 @@
 <script>
     export default {
         name: "NewEventModal",
-        props: [
-            'startDate', 'startTime', 'endDate', 'endTime'
-        ],
         data() {
             return {
                 title: '',
                 status: '',
-                desc: ''
+                desc: '',
+				startDateX: '',
+				startTimeX: '',
+				endDateX: '',
+				endTimeX: '',
             }
         },
+		mounted() {
+			this.$root.$on('bv::modal::show', (bvEvent, modalId) => {
+				this.startDateX = this.$parent.newStartDate
+				this.startTimeX = this.$parent.newStartTime
+				this.endDateX = this.$parent.newEndDate
+				this.endTimeX = this.$parent.newEndTime
+			})
+		},
         methods: {
             addNewEvent () {
-                axios.post('/newEvent', this.title).then(response => this.$bvModal.hide('modal-newEvent'))
+                axios.post(
+                	'/newEvent',{
+                		'title': this.title,
+						'startDate': this.startDateX
+					})
+					.then(response => {
+						console.log(response.data)
+						this.$bvModal.hide('modal-newEvent')
+					})
+				.catch(err => {
+                	console.log(err)
+				})
             }
         }
     }

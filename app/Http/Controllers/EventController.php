@@ -49,7 +49,12 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
+        return response()->json([
+        	'message' => 'success',
+			'status' => 'success',
+			'event' => json_encode($request->all())
+		], 200);
     }
 
     /**
