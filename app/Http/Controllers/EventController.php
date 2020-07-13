@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Event;
+use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
-    /**
-     * @var Event
-     */
+
     protected $event;
     protected $calendar;
 
@@ -23,7 +21,13 @@ class EventController extends Controller
         $this->calendar = Event::select('id', 'title', 'description', 'start', 'end', 'all_day')->get();
     }
 
-    public function show() {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
         return $this->calendar;
     }
 
@@ -45,17 +49,27 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request->all());
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Event  $event
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Event $event)
+    {
+        //
+    }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Event $event)
     {
         //
     }
@@ -64,10 +78,10 @@ class EventController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Event $event)
     {
         //
     }
@@ -75,10 +89,10 @@ class EventController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Event $event)
     {
         //
     }
